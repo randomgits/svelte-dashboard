@@ -1,0 +1,16 @@
+{
+  "name": "sveltekit-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "start": "svelte-kit start"
+  },
+  "devDependencies": {
+    "@sveltejs/kit": "^1.0.0-next.x",
+    "svelte": "^3.29.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.5.1",
+    "@tsconfig/svelte": "^2.0.0"
+  }
+}
