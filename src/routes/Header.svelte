@@ -1,11 +1,11 @@
 <script>
-  // You can add logic for the header here, e.g., navigation
+  // Logic for the header (if any) goes here
 </script>
 
 <header>
-  <!-- Put your header content here -->
+  <!-- Your header content -->
   <nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
+    <a href="/login">Login</a>
+    <a href="/dashboard">Dashboard</a>
   </nav>
 </header>
