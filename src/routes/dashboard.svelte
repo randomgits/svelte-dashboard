@@ -6,11 +6,13 @@
 	async function addTask(): Promise<void> {
 		if(taskInput.trim() !== '' && credits > 0) {
 			// Add task logic goes here...
-			const response = await fetch('/add_task', {
+			const response = await fetch('/api/add_task', {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({text: taskInput, user_id: 'user1'})  // DEMO_USER_ID from login
+				body: JSON.stringify({text: taskInput, user_id: 'user1'})
 			});
+
+
 
 			const data = await response.json();
 			if(response.ok) {
