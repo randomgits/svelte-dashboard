@@ -1,5 +1,3 @@
 <script>
-	import Login from './login.svelte';
+	import Counter from './login.svelte';
 </script>
-
-<Login />
