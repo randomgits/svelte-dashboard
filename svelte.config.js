@@ -6,16 +6,16 @@ const config = {
 
   kit: {
     adapter: adapter(),
+  },
 
-    vite: {
-      server: {
-        proxy: {
-          "/api": {
-            target:
-              "https://cloud-run-microservice-template-python-razcvdqurq-uc.a.run.app",
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, ""),
-          },
+  vite: {
+    server: {
+      proxy: {
+        "/api": {
+          target:
+            "https://cloud-run-microservice-template-python-razcvdqurq-uc.a.run.app",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },
