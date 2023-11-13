@@ -1,29 +1,29 @@
-<script lang="ts">
-	let userId: string = '';
-	let password: string = '';
+<script>
+  import { auth } from '../firebase.js';
+  
+  let email = '';
+  let password = '';
 
-	const DEMO_USER_ID: string = 'demoUser';
-	const DEMO_PASSWORD: string = 'demoPass';
+  async function login() {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      location.href = '/dashboard';
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
-	async function login(): Promise<void> {
-		if(userId === DEMO_USER_ID && password === DEMO_PASSWORD) {
-			// You might want to store some form of session or token here to indicate logged-in state.
-			location.href = '/dashboard';  // Redirect to dashboard after login.
-		} else {
-			alert('Invalid credentials!');
-		}
-	}
+  async function register() {
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      location.href = '/dashboard';
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 </script>
 
 <h2>Login</h2>
-<div>
-	<label>
-		User ID: 
-		<input bind:value={userId} placeholder="demoUser"/>
-	</label>
-	<label>
-		Password: 
-		<input type="password" bind:value={password} placeholder="demoPass"/>
-	</label>
-	<button on:click={login}>Login</button>
-</div>
+<!-- Add login form here -->
+<button on:click={login}>Login</button>
+<button on:click={register}>Register</button>
