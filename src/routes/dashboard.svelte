@@ -1,7 +1,3 @@
-<script context="module">
-  export const ssr = false;
-</script>
-
 <script>
   import { onMount } from 'svelte';
   import { user } from '../lib/auth.js';
@@ -11,45 +7,34 @@
   import SummarizeText from '../components/SummarizeText.svelte';
 
   let currentUser;
-  let showReverseText = true;
+  let selectedTask = null;
 
-onMount(() => {
-  const unsubscribe = user.subscribe((u) => {
-    if (u === null) {
-      // Optional: introduce a delay before redirecting
-      setTimeout(() => {
-        if (!$user) {
-          goto('/login');
-        }
-      }, 1000); // 1 second delay
-    } else {
-      currentUser = u;
-    }
+  onMount(() => {
+    // ... existing subscription logic ...
   });
 
-  // Cleanup
-  return () => {
-    unsubscribe();
-  };
-});
+  function selectTask(taskName) {
+      console.log(`Task selected: ${taskName}`);
+      selectedTask = taskName;
+      selectedTask = taskName; // set the state again to trigger reactivity
+  }
+
 
   async function handleLogout() {
-    try {
-      await signOut();
-      goto('/login');
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Handle any errors that occur during logout
-    }
+    // ... existing logout logic ...
   }
+  $: if (selectedTask) {
+    console.log(`Current task: ${selectedTask}`);
+}
 </script>
 
-<button on:click={() => { showReverseText = true }}>Reverse Text</button>
-<button on:click={() => { showReverseText = false }}>Summarize Text</button>
+
+<button on:click={() => selectTask('reverse')}>Reverse Text</button>
+<button on:click={() => selectTask('summarize')}>Summarize Text</button>
 <button on:click={handleLogout}>Logout</button>
 
-{#if showReverseText}
+{#if selectedTask === 'reverse'}
   <ReverseText />
-{:else}
+{:else if selectedTask === 'summarize'}
   <SummarizeText />
 {/if}
