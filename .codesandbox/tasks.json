@@ -19,23 +19,19 @@
     },
     "build": {
       "name": "build",
-      "command": "npm run build",
-      "runAtStart": false
+      "command": "npm run build"
     },
     "preview": {
       "name": "preview",
-      "command": "npm run preview",
-      "runAtStart": false
+      "command": "npm run preview"
     },
     "check": {
       "name": "check",
-      "command": "npm run check",
-      "runAtStart": false
+      "command": "npm run check"
     },
     "check:watch": {
       "name": "check:watch",
-      "command": "npm run check:watch",
-      "runAtStart": false
+      "command": "npm run check:watch"
     }
   }
 }
