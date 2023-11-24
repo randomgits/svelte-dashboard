@@ -33,6 +33,7 @@ onMount(() => {
   };
 });
 
+
   async function handleLogout() {
     try {
       await signOut();

@@ -4,6 +4,7 @@ import { json } from '@sveltejs/kit';
 //const BACKEND_URL = 'http://localhost:8080/add_task';
 const BACKEND_URL = 'https://cloud-run-microservice-template-python-razcvdqurq-uc.a.run.app/add_task';
 
+
 // Simulate a database operation to decrement credits
 // This is just for demonstration; you'll replace this with your actual database logic.
 let credits = 4;  // This would actually be retrieved from a database per user session

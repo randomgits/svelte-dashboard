@@ -3,6 +3,7 @@ import { json } from '@sveltejs/kit';
 // Update this URL to point to your backend's root URL
 const BACKEND_ROOT_URL = 'https://cloud-run-microservice-template-python-razcvdqurq-uc.a.run.app';
 
+
 export async function GET({ params }) {
     const { task_id } = params;
 

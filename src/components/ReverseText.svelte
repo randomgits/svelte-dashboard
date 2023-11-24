@@ -33,6 +33,7 @@
 		}
 	}
 
+    
     async function pollForTaskCompletion(taskId, localTaskId) {
         const interval = setInterval(async () => {
             try {

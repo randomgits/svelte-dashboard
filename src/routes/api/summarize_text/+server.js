@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 
 const BACKEND_URL = 'https://cloud-run-microservice-template-python-razcvdqurq-uc.a.run.app/summarize_text';
 
+
 export async function POST({ request }) {
     const { text } = await request.json();
     

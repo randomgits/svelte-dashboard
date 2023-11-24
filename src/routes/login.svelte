@@ -29,6 +29,7 @@
     }
   }
 
+
   async function register() {
     if (!isValidEmail(email)) {
       alert('Please enter a valid email address.');
