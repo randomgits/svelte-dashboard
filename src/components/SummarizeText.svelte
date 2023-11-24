@@ -1,20 +1,27 @@
 <script>
-    import { summarizeTextTask } from '../services/taskService.js';
-    let summary = '';
-    let text = '';
+  let summary = '';
+  let text = '';
 
-    async function summarize() {
-        if (text.trim() !== '') {
-            const response = await summarizeTextTask(text);
-            if (response.ok) {
-                const result = await response.json();
-                summary = result.summary;
-                // Additional handling if needed
-            } else {
-                // Handle error
-            }
-        }
+  async function summarize() {
+    try {
+      const response = await fetch('/summarize_text', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const result = await response.json();
+      summary = result.summary;
+    } catch (error) {
+      console.error('Error:', error);
     }
+  }
 </script>
 
-<!-- HTML content remains the same -->
+<textarea bind:value={text} rows="4" cols="50"></textarea>
+<button on:click={summarize}>Summarize</button>
+{#if summary}
+  <div>
+    <h2>Summary</h2>
+    <p>{summary}</p>
+  </div>
+{/if}
