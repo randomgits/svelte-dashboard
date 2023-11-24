@@ -17,11 +17,16 @@
   }
 </script>
 
-<textarea bind:value={text} rows="4" cols="50"></textarea>
-<button on:click={summarize}>Summarize</button>
+<div class="form-control">
+  <textarea class="textarea textarea-bordered h-24" bind:value={text} placeholder="Enter text"></textarea>
+  <button class="btn btn-primary" on:click={summarize}>Summarize</button>
+</div>
+
 {#if summary}
-  <div>
-    <h2>Summary</h2>
-    <p>{summary}</p>
+  <div class="alert alert-success">
+    <div class="flex-1">
+      <label>Summary</label>
+      <p>{summary}</p>
+    </div>
   </div>
 {/if}
