@@ -13,26 +13,23 @@
   let currentUser;
   let showReverseText = true;
 
-onMount(() => {
-  const unsubscribe = user.subscribe((u) => {
-    if (u === null) {
-      // Optional: introduce a delay before redirecting
-      setTimeout(() => {
-        if (!$user) {
-          goto('/login');
-        }
-      }, 1000); // 1 second delay
-    } else {
-      currentUser = u;
-    }
+  onMount(() => {
+    const unsubscribe = user.subscribe((u) => {
+      if (u === null) {
+        setTimeout(() => {
+          if (!$user) {
+            goto('/login');
+          }
+        }, 1000);
+      } else {
+        currentUser = u;
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   });
-
-  // Cleanup
-  return () => {
-    unsubscribe();
-  };
-});
-
 
   async function handleLogout() {
     try {
@@ -40,17 +37,22 @@ onMount(() => {
       goto('/login');
     } catch (error) {
       console.error('Logout error:', error);
-      // Handle any errors that occur during logout
     }
   }
 </script>
 
-<button on:click={() => { showReverseText = true }}>Reverse Text</button>
-<button on:click={() => { showReverseText = false }}>Summarize Text</button>
-<button on:click={handleLogout}>Logout</button>
+<div class="min-h-screen bg-gray-100">
+  <div class="container mx-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <button class="btn btn-primary" on:click={() => { showReverseText = true }}>Reverse Text</button>
+      <button class="btn btn-secondary" on:click={() => { showReverseText = false }}>Summarize Text</button>
+      <button class="btn btn-accent" on:click={handleLogout}>Logout</button>
+    </div>
 
-{#if showReverseText}
-  <ReverseText />
-{:else}
-  <SummarizeText />
-{/if}
+    {#if showReverseText}
+      <ReverseText />
+    {:else}
+      <SummarizeText />
+    {/if}
+  </div>
+</div>

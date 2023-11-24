@@ -76,29 +76,33 @@
 	}
 </script>
 
-<h1>Dashboard</h1>
-<h2>Remaining Credits: {credits}</h2>
-{#if credits === 0}
-	<h3>Buy more credits</h3>
-{/if}
-<input bind:value={taskInput} placeholder="Enter text">
-<button on:click|preventDefault={addTask}>Add</button>
-{#each tasks as task}
-    <div>
-        <p>{task.name} {task.status}</p>
-        {#if task.status === 'Queued' || task.status === 'Processing'}
-            <div class="loading-bar">
-                <div class="loading-indicator"></div>
-            </div>
-        {/if}
-        {#if task.status === 'Complete'}
-            <button on:click={() => toggleAccordion(task.id)}>See Result</button>
-            <div class="accordion-content" style="{task.showResult ? 'display: block;' : 'display: none;'}">
-                <p>Reversed Text: {task.result}</p>
-            </div>
-        {/if}
+<div class="p-4">
+  <h1 class="text-3xl font-bold">Dashboard</h1>
+  <h2 class="text-xl mb-4">Remaining Credits: {credits}</h2>
+  {#if credits === 0}
+    <h3 class="text-lg text-red-500">Buy more credits</h3>
+  {/if}
+  <div class="mb-4">
+    <input class="w-full p-2 border border-gray-300 rounded" bind:value={taskInput} placeholder="Enter text" />
+    <button class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click|preventDefault={addTask}>Add</button>
+  </div>
+  {#each tasks as task}
+    <div class="mb-4 p-4 bg-white shadow rounded">
+      <p class="font-bold">{task.name} - {task.status}</p>
+      {#if task.status === 'Queued' || task.status === 'Processing'}
+        <div class="mt-2 bg-gray-200 rounded h-2 overflow-hidden">
+          <div class="bg-blue-600 h-2" style="width: 50%;"></div>
+        </div>
+      {/if}
+      {#if task.status === 'Complete'}
+        <button class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" on:click={() => toggleAccordion(task.id)}>See Result</button>
+        <div class="{task.showResult ? 'block' : 'hidden'} mt-2">
+          <p>Reversed Text: {task.result}</p>
+        </div>
+      {/if}
     </div>
-{/each}
+  {/each}
+</div>
 
 <style>
     .loading-bar {
