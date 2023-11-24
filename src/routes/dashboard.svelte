@@ -9,7 +9,14 @@
   import { signOut } from '../firebase.js';
   import ReverseText from '../components/ReverseText.svelte';
   import SummarizeText from '../components/SummarizeText.svelte';
+  import Sidebar from '../components/Sidebar.svelte';
 
+  let activeTab = 'dashboard';
+
+  function setActiveTab(tab) {
+    activeTab = tab;
+  }
+  
   let currentUser;
   let showReverseText = true;
 
@@ -41,18 +48,22 @@
   }
 </script>
 
-<div class="min-h-screen bg-gray-100">
-  <div class="container mx-auto p-6">
-    <div class="flex justify-between items-center mb-6">
-      <button class="btn btn-primary" on:click={() => { showReverseText = true }}>Reverse Text</button>
-      <button class="btn btn-secondary" on:click={() => { showReverseText = false }}>Summarize Text</button>
-      <button class="btn btn-accent" on:click={handleLogout}>Logout</button>
-    </div>
 
-    {#if showReverseText}
+<div class="flex h-screen bg-gray-100">
+  <Sidebar {activeTab} {setActiveTab} />
+
+  <!-- Main content -->
+  <div class="flex-1 p-6">
+    {#if activeTab === 'dashboard'}
+      <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+      <!-- Add dashboard content here -->
+    {:else if activeTab === 'reverseText'}
       <ReverseText />
-    {:else}
+    {:else if activeTab === 'summarizeText'}
       <SummarizeText />
+    {:else if activeTab === 'credits'}
+      <h2 class="text-2xl font-bold mb-4">Credits</h2>
+      <!-- Add credits content here -->
     {/if}
   </div>
 </div>
