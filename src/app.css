@@ -1,11 +1,30 @@
+/* src/app.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: "Inter", sans-serif; /* Choose a modern, readable font */
+}
+
 button {
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
+}
+
+/* Consistent spacing and sizing */
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+input,
+button {
+  padding: 0.5rem 1rem;
 }

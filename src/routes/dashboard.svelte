@@ -51,7 +51,7 @@
 
 <div class="flex h-screen bg-gray-100">
   <Sidebar {activeTab} {setActiveTab} />
-  <div class="flex-1 overflow-auto p-6">
+  <div class="flex-1 p-6">
     {#if activeTab === 'dashboard'}
       <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
       <!-- Dashboard content here -->

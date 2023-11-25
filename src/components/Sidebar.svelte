@@ -34,7 +34,7 @@
   }
 </script>
 
-<div class={`bg-gray-800 text-gray-100 flex flex-col h-screen ${isSidebarOpen ? 'w-64' : 'w-20'} transition-width duration-300`}>
+<div class={`bg-gray-800 text-white flex flex-col h-screen ${isSidebarOpen ? 'w-64' : 'w-20'} transition-all duration-300`}>
   <div class="flex items-center justify-between p-4">
     <div class="text-xl font-bold text-white">Dashboard</div>
     <button on:click={toggleSidebar} class="text-gray-100 focus:outline-none md:hidden">
@@ -87,7 +87,7 @@
 
 <style>
   .sidebar-item {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     margin: 0.25rem 0;
     border-radius: 0.375rem;
     transition: background-color 0.2s, color 0.2s;
@@ -98,4 +98,5 @@
   .transition-width {
     transition: width 0.3s ease;
   }
+
 </style>
