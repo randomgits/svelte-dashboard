@@ -49,7 +49,7 @@
 </script>
 
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <div class="p-6 max-w-sm w-full bg-white shadow-md rounded">
+  <div class="max-w-md w-full bg-white p-6 rounded-lg shadow">
     <h2 class="text-2xl font-bold mb-4 text-gray-800">Login</h2>
     <div class="mb-4">
       <input class="w-full p-2 border border-gray-300 rounded focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50" type="email" bind:value={email} placeholder="Email" />

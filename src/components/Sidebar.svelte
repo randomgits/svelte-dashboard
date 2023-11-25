@@ -34,7 +34,7 @@
   }
 </script>
 
-<div class={`bg-gray-800 text-white flex flex-col h-screen ${isSidebarOpen ? 'w-64' : 'w-20'} transition-all duration-300`}>
+<div class={`bg-primary text-white flex flex-col h-screen ${isSidebarOpen ? 'w-64' : 'w-20'} transition-all duration-300`}>
   <div class="flex items-center justify-between p-4">
     <div class="text-xl font-bold text-white">Dashboard</div>
     <button on:click={toggleSidebar} class="text-gray-100 focus:outline-none md:hidden">

@@ -52,16 +52,16 @@
 <div class="flex h-screen bg-gray-100">
   <Sidebar {activeTab} {setActiveTab} />
   <div class="flex-1 p-6">
-    {#if activeTab === 'dashboard'}
-      <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
-      <!-- Dashboard content here -->
-    {:else if activeTab === 'reverseText'}
-      <ReverseText />
-    {:else if activeTab === 'summarizeText'}
-      <SummarizeText />
-    {:else if activeTab === 'credits'}
-      <h2 class="text-2xl font-bold mb-4">Credits</h2>
-      <!-- Credits content here -->
-    {/if}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {#if activeTab === 'dashboard'}
+        <!-- Dashboard cards or widgets go here -->
+      {:else if activeTab === 'reverseText'}
+        <ReverseText />
+      {:else if activeTab === 'summarizeText'}
+        <SummarizeText />
+      {:else if activeTab === 'credits'}
+        <!-- Credits content here -->
+      {/if}
+    </div>
   </div>
 </div>

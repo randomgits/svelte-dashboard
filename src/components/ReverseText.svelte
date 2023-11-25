@@ -76,7 +76,7 @@
 	}
 </script>
 
-<div class="p-4">
+<div class="p-4 bg-white shadow rounded">
   <h1 class="text-3xl font-bold">Dashboard</h1>
   <h2 class="text-xl mb-4">Remaining Credits: {credits}</h2>
   {#if credits === 0}
