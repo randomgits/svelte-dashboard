@@ -51,19 +51,17 @@
 
 <div class="flex h-screen bg-gray-100">
   <Sidebar {activeTab} {setActiveTab} />
-
-  <!-- Main content -->
-  <div class="flex-1 p-6">
+  <div class="flex-1 overflow-auto p-6">
     {#if activeTab === 'dashboard'}
       <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
-      <!-- Add dashboard content here -->
+      <!-- Dashboard content here -->
     {:else if activeTab === 'reverseText'}
       <ReverseText />
     {:else if activeTab === 'summarizeText'}
       <SummarizeText />
     {:else if activeTab === 'credits'}
       <h2 class="text-2xl font-bold mb-4">Credits</h2>
-      <!-- Add credits content here -->
+      <!-- Credits content here -->
     {/if}
   </div>
 </div>

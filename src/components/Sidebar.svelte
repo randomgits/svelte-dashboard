@@ -1,4 +1,6 @@
 <script>
+  import { signOut } from '../firebase.js';
+  import { goto } from '$app/navigation';
   import DashboardIcon from '../icons/DashboardIcon.svelte';
   import HamburgerMenuIcon from '../icons/HamburgerMenuIcon.svelte';
   import { onMount } from 'svelte';
@@ -22,7 +24,13 @@
   }
 
   async function handleLogout() {
-    // Implement logout functionality
+    try {
+      await signOut();
+      goto('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Handle any errors that occur during logout
+    }
   }
 </script>
 
