@@ -1,20 +1,22 @@
 <script context="module">
-  export const ssr = false;
+  import { goto } from '$app/navigation';
+
+  export async function load({ session }) {
+    // Check if user is authenticated
+    if (!session.user) {
+      // Redirect to login page if not authenticated
+      return goto('/login');
+    }
+  }
 </script>
 
 <script>
   import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
   import { user } from '../lib/auth.js';
   import { signOut } from '../firebase.js';
   import ReverseText from '../components/ReverseText.svelte';
   import SummarizeText from '../components/SummarizeText.svelte';
   import Sidebar from '../components/Sidebar.svelte';
-
-  // Redirect to login page if not authenticated
-  $: if (!$user) {
-    goto('/login');
-  }
 
   let activeTab = 'dashboard';
 
@@ -27,15 +29,7 @@
 
   onMount(() => {
     const unsubscribe = user.subscribe((u) => {
-      if (u === null) {
-        setTimeout(() => {
-          if (!$user) {
-            goto('/login');
-          }
-        }, 1000);
-      } else {
-        currentUser = u;
-      }
+      currentUser = u;
     });
 
     return () => {
@@ -46,6 +40,7 @@
   async function handleLogout() {
     try {
       await signOut();
+      // This is client-side specific
       goto('/login');
     } catch (error) {
       console.error('Logout error:', error);

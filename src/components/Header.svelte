@@ -30,7 +30,7 @@
           {#if showDropdown}
             <div class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
               <p class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Welcome {currentUser}!</p>
-              <a href="/user-profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+              <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
               <a href="/credits" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Credits</a>
               <a href="/upgrade" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Upgrade</a>
               <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
