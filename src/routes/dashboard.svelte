@@ -11,10 +11,9 @@
   import SummarizeText from '../components/SummarizeText.svelte';
   import Sidebar from '../components/Sidebar.svelte';
 
-    export async function load() {
-    if (!$user) {
-      goto('/login');
-    }
+  // Redirect to login page if not authenticated
+  $: if (!$user) {
+    goto('/login');
   }
 
   let activeTab = 'dashboard';
