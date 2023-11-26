@@ -1,24 +1,22 @@
 <script>
-  import { user } from '$lib/auth.js';
   import { goto } from '$app/navigation';
-  import { onMount } from 'svelte';
+  import { user } from '$lib/auth.js';
+  import { signOut } from '../firebase.js';
 
   let showDropdown = false;
-  let currentUser = null;
-  let isLoading = true;
+  let currentUser; // Declare currentUser
 
-  $: user.subscribe(u => {
-    isLoading = false;
-    currentUser = u ? u.email : null;
-  });
+  // Subscribe to the user store and update currentUser
+  $: if ($user) {
+    currentUser = $user.email; // Or any other property you want to display
+  }
 
   function toggleDropdown() {
     showDropdown = !showDropdown;
   }
 
   async function logout() {
-    await auth.signOut();
-    currentUser = null; // Reset the user state
+    await signOut(auth);
     showDropdown = false;
     goto('/login');
   }
@@ -29,7 +27,7 @@
   <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
     <a class="text-xl font-semibold" href="/dashboard">Your Brand</a>
     <div class="flex items-center">
-      {#if currentUser}
+      {#if $user}
         <div class="relative">
           <button class="text-lg mx-2 hover:text-secondary" on:click={toggleDropdown}>Profile</button>
           {#if showDropdown}
