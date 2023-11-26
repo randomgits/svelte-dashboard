@@ -4,13 +4,19 @@
 
 <script>
   import { onMount } from 'svelte';
-  import { user } from '../lib/auth.js';
   import { goto } from '$app/navigation';
+  import { user } from '../lib/auth.js';
   import { signOut } from '../firebase.js';
   import ReverseText from '../components/ReverseText.svelte';
   import SummarizeText from '../components/SummarizeText.svelte';
   import Sidebar from '../components/Sidebar.svelte';
 
+  export async function load({ session }) {
+    if (!session.user) {
+      goto('/login');
+    }
+  }
+  
   let activeTab = 'dashboard';
 
   function setActiveTab(tab) {

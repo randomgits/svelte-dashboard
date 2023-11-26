@@ -5,9 +5,11 @@
 
   let showDropdown = false;
   let currentUser = null;
+  let isLoading = true;
 
-  onMount(() => {
-    $: currentUser = $user ? $user.email : null; // Assuming email as username
+  $: user.subscribe(u => {
+    isLoading = false;
+    currentUser = u ? u.email : null;
   });
 
   function toggleDropdown() {
@@ -16,9 +18,12 @@
 
   async function logout() {
     await auth.signOut();
+    currentUser = null; // Reset the user state
+    showDropdown = false;
     goto('/login');
   }
 </script>
+
 
 <header class="bg-primary text-white shadow-md">
   <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
