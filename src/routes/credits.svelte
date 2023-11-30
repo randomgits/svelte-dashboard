@@ -1,8 +1,28 @@
 <script>
-  let credits = 4; // Example credits value
+  import { user } from '$lib/auth.js';
+  import { signOut } from '../firebase.js';
+  import { goto } from '$app/navigation';
+
+  let showDropdown = false;
+  let currentUser;
+  let credits = 4; // Assuming this is the default credits
+
+  $: currentUser = $user ? $user.email : null;
+
+  function toggleDropdown() {
+    showDropdown = !showDropdown;
+  }
+
+  async function logout() {
+    await signOut();
+    showDropdown = false;
+    goto('/login');
+  }
 
   function upgradeCredits() {
-    goto('/upgrade'); // Navigate to Upgrade page
+    // Implement the functionality for upgrading credits
+    // For example, navigating to a payment page or incrementing credits
+    // goto('/payment'); or credits += 10; as an example
   }
 </script>
 

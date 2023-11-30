@@ -4,9 +4,24 @@
   import { goto } from '$app/navigation';
 
   let showDropdown = false;
-  let currentUser;
+  let currentUser = null;
+  let isLoading = true;  
 
-  $: currentUser = $user ? $user.email : null;
+  user.subscribe(($user) => {
+    isLoading = $user.loading;
+    if ($user && $user.data) {
+      currentUser = $user.data.email;
+    } else {
+      currentUser = null;
+      if (typeof window !== 'undefined') {
+        goto('/login');
+      }
+    }
+  });
+
+  $: if (!currentUser) {
+    showDropdown = false;
+  }
 
   function toggleDropdown() {
     showDropdown = !showDropdown;
@@ -15,16 +30,26 @@
   async function logout() {
     await signOut();
     showDropdown = false;
-    goto('/login');
+  }
+
+    function navigateToDashboard() {
+    if (currentUser) {
+      goto('/dashboard');
+    } else {
+      goto('/login');
+    }
   }
 </script>
 
 
+
+
 <header class="bg-primary text-white shadow-md">
   <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-    <a class="text-xl font-semibold" href="/dashboard">Your Brand</a>
-    <div class="flex items-center">
-      {#if currentUser}
+    {#if !isLoading}
+      <a class="text-xl font-semibold" href="/dashboard">Your Brand</a>
+      <div class="flex items-center">
+        {#if currentUser}
         <div class="relative">
           <button class="text-lg mx-2 hover:text-secondary" on:click={toggleDropdown}>Profile</button>
           {#if showDropdown}
@@ -41,7 +66,8 @@
       {:else}
         <a class="text-lg mx-2 hover:text-secondary" href="/login">Login</a>
       {/if}
-      <a class="text-lg mx-2 hover:text-secondary" href="/dashboard">Dashboard</a>
+<a class="text-lg mx-2 hover:text-secondary" on:click={navigateToDashboard}>Dashboard</a>
     </div>
+  {/if}  
   </nav>
 </header>

@@ -15,6 +15,10 @@
     isSidebarOpen = !isMobile;
   });
 
+  $: if (!isSidebarOpen) {
+    isTasksOpen = false;
+  }
+
   function toggleSidebar() {
     isSidebarOpen = !isSidebarOpen;
   }
@@ -29,7 +33,6 @@
       goto('/login');
     } catch (error) {
       console.error('Logout error:', error);
-      // Handle any errors that occur during logout
     }
   }
 </script>
