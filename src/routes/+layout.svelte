@@ -7,17 +7,16 @@
   let isAuthenticated = false;
 
   user.subscribe($user => {
-    isAuthenticated = $user && $user.data;
-  });
+    isAuthenticated = !!$user.data;
 
-  onMount(() => {
+    // Check authentication inside the subscription
     if (!isAuthenticated && typeof window !== 'undefined') {
       goto('/login');
     }
   });
 
+  // Removed the onMount check as it is now handled inside the subscription
 </script>
 
 <Header />
 <slot />
-

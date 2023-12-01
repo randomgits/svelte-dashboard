@@ -1,13 +1,16 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
+import { auth } from "../firebase.js"; // Import auth from firebase.js
 
-export const user = writable({ loading: true, data: null });
+// Check if running in the browser
+const isBrowser = typeof window !== "undefined";
 
-if (typeof window !== 'undefined') {
-  import('firebase/auth').then(({ getAuth, onAuthStateChanged }) => {
-    const auth = getAuth();
+const storedUser = isBrowser ? JSON.parse(localStorage.getItem("user")) : null;
+export const user = writable(
+  storedUser
+    ? { data: storedUser, loading: false }
+    : { data: null, loading: true },
+);
 
-    onAuthStateChanged(auth, (firebaseUser) => {
-      user.set({ loading: false, data: firebaseUser });
-    });
-  });
-}
+auth.onAuthStateChanged((firebaseUser) => {
+  user.set({ loading: false, data: firebaseUser });
+});

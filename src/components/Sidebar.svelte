@@ -3,20 +3,15 @@
   import { goto } from '$app/navigation';
   import DashboardIcon from '../icons/DashboardIcon.svelte';
   import HamburgerMenuIcon from '../icons/HamburgerMenuIcon.svelte';
-  import { onMount } from 'svelte';
   export let activeTab;
   export let setActiveTab;
   let isMobile = false;
   let isSidebarOpen = true;
   let isTasksOpen = false;
 
-  onMount(() => {
-    isMobile = window.innerWidth < 768;
+  $: if (window.innerWidth < 768) {
+    isMobile = true;
     isSidebarOpen = !isMobile;
-  });
-
-  $: if (!isSidebarOpen) {
-    isTasksOpen = false;
   }
 
   function toggleSidebar() {
@@ -28,12 +23,8 @@
   }
 
   async function handleLogout() {
-    try {
-      await signOut();
-      goto('/login');
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
+    await signOut();
+    goto('/login');
   }
 </script>
 

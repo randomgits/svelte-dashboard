@@ -1,10 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  setPersistence,
-  browserSessionPersistence,
-  signOut as firebaseSignOut,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBz4yVra2RHVKnfCvqhgNdTWhSI1aqs3HI",
@@ -18,12 +14,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-setPersistence(auth, browserSessionPersistence).catch((error) => {
-  console.error("Firebase persistence error:", error);
-});
+if (typeof window !== 'undefined') {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  });
+}
 
-export const signOut = () => {
-  return firebaseSignOut(auth);
+const signOut = async () => {
+  try {
+    await firebaseSignOut(auth);
+  } catch (error) {
+    console.error("Error signing out: ", error);
+  }
 };
 
-export { auth };
+export { auth, signOut };
